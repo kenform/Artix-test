@@ -1,0 +1,22 @@
+[
+    {
+        "contextCode": 6,
+        "contextName": "Открытый документ"
+    },
+    {
+        "contextCode": 7,
+        "contextName": "Подитог (оплата)"
+    },
+    {
+        "contextCode": 8,
+        "contextName": "Сдача"
+    },
+    {
+        "contextCode": 9,
+        "contextName": "Закрытый документ"
+    },
+    {
+        "contextCode": 17,
+        "contextName": "Режим инвентаризации"
+    }
+]

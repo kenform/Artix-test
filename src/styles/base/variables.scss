@@ -1,0 +1,32 @@
+$fontFamily: 'Roboto';
+$fontSize: 18px;
+
+
+$mainColor: rgba(0, 0, 0, 0.87);
+
+$blueColor: #0D47A1;
+
+$headerColor: #464e62;
+$titleColor: #d5eaff;
+$greenColor: #58f0a7;
+$redColor: #f94b55;
+$cryptoColor: #c7e1ff;
+$blackColor: #08090b;
+
+$minWidth: 320;
+$maxWidth: 1920;
+
+$maxWidthContainer: 848;
+
+$containerPadding: 30;
+
+$containerWidth: $maxWidthContainer + $containerPadding;
+$pc: em($containerWidth);
+$tablet: em(991.98);
+$mobile: em(767.98);
+$mobileSmall: em(479.98);
+
+// Тип адаптива:
+// 1 = адаптивно (резина)
+// 2 = по брейк поинтам
+$responsiveType: 1;

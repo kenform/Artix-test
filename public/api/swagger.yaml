@@ -1,0 +1,176 @@
+openapi: '3.0.0'
+info:
+    title: Artix API
+    version: 1.0.0
+servers:
+    - url: http://localhost:3000/api
+      description: default
+paths:
+    /contexts:
+        get:
+            tags:
+                - contexts
+            summary: get contexts
+            responses:
+                '200':
+                    description: 'successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Context'
+    /actions:
+        get:
+            tags:
+                - actions
+            summary: get actions
+            responses:
+                '200':
+                    description: 'successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Action'
+    /actions-panel/{actionsPanelCode}:
+        get:
+            tags:
+                - actions-panel
+            summary: get actions panel
+            parameters:
+                - name: actionsPanelCode
+                  in: path
+                  description: Code of actions panel to return
+                  required: true
+                  schema:
+                      type: integer
+                      format: int64
+            responses:
+                '200':
+                    description: 'successful operation'
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ActionPanel'
+    /actions-panel:
+        put:
+            tags:
+                - actions-panel
+            summary: update an existing actions panel
+            requestBody:
+                description: update an existing actions panel in the store
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ActionPanel'
+            responses:
+                '200':
+                    description: 'successful operation'
+components:
+    schemas:
+        Context:
+            required:
+                - contextCode
+                - contextName
+            type: object
+            properties:
+                contextCode:
+                    type: integer
+                    format: int64
+                    example: 10
+                contextName:
+                    type: string
+                    example: string
+        Action:
+            required:
+                - actionCode
+                - actionName
+            type: object
+            properties:
+                actionCode:
+                    type: integer
+                    format: int64
+                    example: 10
+                actionName:
+                    type: string
+                    example: string
+        ActionPanelItem:
+            required:
+                - code
+                - actionCode
+                - row
+                - column
+                - rowSpan
+                - columnSpan
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int64
+                    example: 10
+                actionCode:
+                    type: integer
+                    format: int64
+                    example: 10
+                row:
+                    type: integer
+                    format: int64
+                    example: 10
+                column:
+                    type: integer
+                    format: int64
+                    example: 10
+                rowSpan:
+                    type: integer
+                    format: int64
+                    example: 10
+                columnSpan:
+                    type: integer
+                    format: int64
+                    example: 10
+                color:
+                    type: string
+                    example: '#ffffff'
+                name:
+                    type: string
+                    example: string
+        ActionPanel:
+            required:
+                - code
+                - contextCode
+                - page
+                - rowCount
+                - columnCount
+                - actionPanelItems
+            type: object
+            properties:
+                code:
+                    type: integer
+                    format: int64
+                    example: 10
+                contextCode:
+                    type: integer
+                    format: int64
+                    example: 10
+                page:
+                    type: integer
+                    format: int64
+                    example: 10
+                rowCount:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    maximum: 6
+                    example: 10
+                columnCount:
+                    type: integer
+                    format: int64
+                    minimum: 1
+                    maximum: 20
+                    example: 10
+                actionPanelItems:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ActionPanelItem'

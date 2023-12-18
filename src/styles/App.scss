@@ -1,0 +1,39 @@
+@use 'sass:math';
+@import './base/variables.scss';
+@import './base/mixins.scss';
+.main-block {
+	&__container {
+	}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		@include adaptiveValue('padding-top', 40, 30);
+	}
+	&__title {
+		/* typography/h4 */
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0.25px;
+		line-height: math.div(42, 34);
+		@include adaptiveValue('font-size', 34, 26);
+	}
+	&__suptitle {
+		font-style: normal;
+		font-weight: 400;
+		line-height: math.div(32, 24);
+		@include adaptiveValue('font-size', 24, 20);
+		@include adaptiveValue('margin-top', 32, 20);
+		@include adaptiveValue('margin-bottom', 24, 15);
+	}
+}
+
+.panel {
+	border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0, 0.23);
+	min-height: 480px;
+	min-width: 800px;
+	&__content {
+	}
+	&__body {
+	}
+}
