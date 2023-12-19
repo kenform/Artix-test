@@ -3,10 +3,11 @@ import TextField from '@mui/material/TextField';
 type typeTextFieldProps = {
 	text: string,
 	width: string,
-	defaultValue: number,
+	defaultValue: string,
+	value?:string,
 }
 
-export default function PanelTextField({text,width,defaultValue}:typeTextFieldProps) {
+export default function PanelTextField({text,width,defaultValue,value}:typeTextFieldProps) {
 	return (
 			<TextField
 				id='outlined-basic'
@@ -18,6 +19,7 @@ export default function PanelTextField({text,width,defaultValue}:typeTextFieldPr
 				sx={{
 					'& > :not(style)': { width: `${width}` },
 				}}
+				value={value}
 			/>
 
 

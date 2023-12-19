@@ -15,7 +15,7 @@ export const panelSlice = createSlice({
 		setItems(state, action: PayloadAction<typeInitialStateForm[]>) {
 			state.items = action.payload;
 		},
-
+		
 	},
 	extraReducers: (builder) => {
 		builder

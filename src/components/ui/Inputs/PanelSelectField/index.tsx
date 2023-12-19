@@ -1,49 +1,53 @@
-import TextField from '@mui/material/TextField';
+import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import { typeActionPanelItems } from '../../../../redux/panel/types';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+import { typeActionsData } from '../../../../redux/drawer/types';
+import { InputLabel } from '@mui/material';
+
 // import CloseIcon from '@mui/icons-material/Close';
 // import { ListItemIcon } from '@mui/material';
-
-// type typeTextFieldProps = {
-// 	text: string;
-// 	width: string;
-// 	defaultValue: number;
-// }& typeActionPanelItems;
 
 type typeTextFieldProps = {
 	text: string;
 	width: string;
-	defaultValue: number;
-	actionPanelItems:{
-		value:string;
-		label:string;
-	}[];
-}
+	defaultValue: string;
+	array: typeActionsData;
+};
 
+export default function PanelTextField({ text, width, defaultValue, array }: typeTextFieldProps) {
+	const [age, setAge] = useState('');
+	const handleChange = (event: SelectChangeEvent) => {
+		setAge(event.target.value);
+	};
 
-export default function PanelTextField({ text, width, defaultValue, actionPanelItems }: typeTextFieldProps) {
 	return (
-
-		<TextField
-			select
-			id='outlined-basic'
-			label={text}
-			variant='outlined'
-			defaultValue={defaultValue}
-			margin='normal'
-			size="small"
-			sx={{
-				'& > :not(style)': { width: `${width}` },
-			}}
-		>
-			{actionPanelItems.map((element) => (
+		<>
+			<FormControl
+				sx={{
+					'& > :not(style)': { width: `${width}` },
+				}}
+				margin='normal'
+			>
+				<InputLabel id="demo-simple-select-filled-label">{text}</InputLabel>
+				<Select
 				
-				<MenuItem key={element.code} value={element.value}>
-					{element.label}	
-				</MenuItem>
-			))}
-		
-		</TextField>
-
+					label={text}
+					id='demo-simple-select-filled'
+					value={age}
+					onChange={handleChange}
+					size='small'
+					variant='outlined'
+					defaultValue={defaultValue}
+				>
+					{array.map((element) => (
+						<MenuItem key={element.actionCode} value={element.actionCode}>
+							{element.actionName}
+						</MenuItem>
+					))}
+				</Select>
+			</FormControl>
+		</>
 	);
 }

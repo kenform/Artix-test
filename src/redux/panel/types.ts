@@ -19,8 +19,7 @@ export type typeActionPanelItems = {
 	}[];
 };
 
-
-export type typeContext = {
+export type typeContextData = {
 	contextCode: number;
 	contextName: string;
 }[];

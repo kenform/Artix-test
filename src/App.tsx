@@ -3,7 +3,8 @@ import '@fontsource/roboto/500.css';
 
 import { useEffect } from 'react';
 import { useAppDispatch } from './redux/store';
-import { fetchInitialStateData, fetchOutputData } from './redux/panel/asyncActions';
+import { fetchInitialStateData } from './redux/panel/asyncActions';
+import { fetchActionsData } from './redux/drawer/asyncActions';
 
 import Header from './components/Header';
 import MainSettings from './components/MainSettings';
@@ -18,7 +19,7 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(fetchInitialStateData());
-		dispatch(fetchOutputData());
+		dispatch(fetchActionsData());
 	}, []);
 
 	return (
@@ -39,7 +40,7 @@ function App() {
 							<div className='main-block__suptitle'>
 								<h5>Настройка панели</h5>
 							</div>
-							<PanelSetting />
+							{/* <PanelSetting /> */}
 							<PanelDrawer />
 
 							<Panel />

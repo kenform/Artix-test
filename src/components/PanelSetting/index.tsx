@@ -6,8 +6,8 @@ import PanelSelectField from '../ui/Inputs/PanelSelectField';
 
 const dataRows = [
 	{
-		value: "1",
-		label: "1",
+		value: '1',
+		label: '1',
 	},
 	{
 		value: '2',
@@ -23,13 +23,39 @@ const dataRows = [
 	},
 ];
 
+const dataColumns = [
+	{
+		value: '1',
+		label: '1',
+	},
+	{
+		value: '2',
+		label: '2',
+	},
+	{
+		value: '3',
+		label: '3',
+	},
+	{
+		value: '4',
+		label: '4',
+	},
+	{
+		value: '5',
+		label: '5',
+	},
+	{
+		value: '6',
+		label: '6',
+	},
+];
+
 export default function PanelSetting() {
 	const { items, status } = useSelector(panelDataSelector);
 
 	return (
 		<>
 			{status === 'success' && (
-	
 				<Box
 					component='form'
 					sx={{
@@ -42,18 +68,21 @@ export default function PanelSetting() {
 					<PanelSelectField
 						text='Количество строк'
 						width='200px'
-						defaultValue={3}
-						actionPanelItems={dataRows}
+						defaultValue={'3'}
+						array={dataRows}
+			
 					/>
 
-			{/* {console.log(items.actionPanelItems[0].code)} */} */}
 					<PanelSelectField
 						text='Количество столбцов'
 						width='200px'
-						defaultValue={items.columnCount}
-						actionPanelItems={items.actionPanelItems}
+						defaultValue={'6'}
+						array={dataColumns}
+	
 					/>
+				
 				</Box>
+				
 			)}
 		</>
 	);

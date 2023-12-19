@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import panel from './panel/slice';
+import drawer from './drawer/slice';
 import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
 	reducer: {
 		panel,
+		drawer,
 	},
 });
 
