@@ -5,7 +5,7 @@ import { fetchActionsData } from './asyncActions';
 
 const initialState: IDrawerSliceState = {
 	actions: [],
-	color: 'rgba(178.9692, 73.9908, 73.9908, 1)',
+	color: '',
 	status: Status.LOADING,
 };
 

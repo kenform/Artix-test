@@ -19,10 +19,6 @@ export type typeActionPanelItems = {
 	}[];
 };
 
-export type typeContextData = {
-	contextCode: number;
-	contextName: string;
-}[];
 
 export enum Status {
 	LOADING = 'loading',

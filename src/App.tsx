@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from './redux/store';
 import { fetchInitialStateData } from './redux/panel/asyncActions';
 import { fetchActionsData } from './redux/drawer/asyncActions';
+import { fetchContextsData } from './redux/context/asyncActions';
 
 import Header from './components/Header';
 import MainSettings from './components/MainSettings';
@@ -15,11 +16,13 @@ import Panel from './components/Panel';
 
 import './styles/App.scss';
 
+
 function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(fetchInitialStateData());
 		dispatch(fetchActionsData());
+		// dispatch(fetchContextsData());
 	}, []);
 
 	return (
@@ -40,7 +43,7 @@ function App() {
 							<div className='main-block__suptitle'>
 								<h5>Настройка панели</h5>
 							</div>
-							{/* <PanelSetting /> */}
+							<PanelSetting />
 							<PanelDrawer />
 
 							<Panel />

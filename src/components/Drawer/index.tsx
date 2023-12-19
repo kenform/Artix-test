@@ -68,7 +68,7 @@ export default function PanelDrawer() {
 			<PanelSelectField
 				text='Действие'
 				width='400px'
-				defaultValue={''}
+				defaultValue={'2'}
 				array={actions}
 			/>
 

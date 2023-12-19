@@ -68,7 +68,7 @@ export default function PanelSetting() {
 					<PanelSelectField
 						text='Количество строк'
 						width='200px'
-						defaultValue={'3'}
+						defaultValue={items.rowCount}
 						array={dataRows}
 			
 					/>
@@ -76,7 +76,7 @@ export default function PanelSetting() {
 					<PanelSelectField
 						text='Количество столбцов'
 						width='200px'
-						defaultValue={'6'}
+						defaultValue={items.columnCount}
 						array={dataColumns}
 	
 					/>

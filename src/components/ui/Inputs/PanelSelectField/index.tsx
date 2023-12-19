@@ -6,22 +6,22 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { typeActionsData } from '../../../../redux/drawer/types';
 import { InputLabel } from '@mui/material';
 
-// import CloseIcon from '@mui/icons-material/Close';
-// import { ListItemIcon } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { ListItemIcon } from '@mui/material';
 
 type typeTextFieldProps = {
 	text: string;
 	width: string;
 	defaultValue: string;
 	array: typeActionsData;
+	icon?:string;
 };
 
-export default function PanelTextField({ text, width, defaultValue, array }: typeTextFieldProps) {
-	const [age, setAge] = useState('');
+export default function PanelTextField({ text, width, defaultValue, array,icon }: typeTextFieldProps) {
+	const [age, setAge] = useState(defaultValue);
 	const handleChange = (event: SelectChangeEvent) => {
 		setAge(event.target.value);
 	};
-
 	return (
 		<>
 			<FormControl
@@ -30,9 +30,9 @@ export default function PanelTextField({ text, width, defaultValue, array }: typ
 				}}
 				margin='normal'
 			>
-				<InputLabel id="demo-simple-select-filled-label">{text}</InputLabel>
+				<InputLabel id='demo-simple-select-filled-label'>{text}</InputLabel>
 				<Select
-				
+					margin='dense'
 					label={text}
 					id='demo-simple-select-filled'
 					value={age}
@@ -42,8 +42,21 @@ export default function PanelTextField({ text, width, defaultValue, array }: typ
 					defaultValue={defaultValue}
 				>
 					{array.map((element) => (
-						<MenuItem key={element.actionCode} value={element.actionCode}>
-							{element.actionName}
+						<MenuItem
+							sx={{
+								paddingLeft: `10px`,
+							}}
+							key={Object.values(element)[0]}
+							value={Object.values(element)[0]}
+						>
+							{Object.values(element)[1]}
+							{icon && <ListItemIcon sx={{
+								position:'absolute',	
+								right: `10px`,
+							}}>
+								<CloseIcon/>
+							</ListItemIcon> }
+							
 						</MenuItem>
 					))}
 				</Select>
