@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IContextsSliceState, Status, typeContextData } from './types';
 import {fetchContextsData } from './asyncActions';
+import { IContextsSliceState, Status, typeContextData } from './types';
 
-const initialState: IContextsSliceState = {
+ const initialState: IContextsSliceState = {
 	contexts: [],
 	status: Status.LOADING,
 };
 
 export const contextsSlice = createSlice({
-	name: 'contexts',
+	name: 'context',
 	initialState,
 	reducers: {
 		setContexts(state, action: PayloadAction<typeContextData[]>) {
@@ -22,13 +22,13 @@ export const contextsSlice = createSlice({
 			})
 
 			.addCase(fetchContextsData.fulfilled, (state, action) => {
-				state.actions = action.payload;
+				state.contexts = action.payload;
 				state.status = Status.SUCCESS;
 			})
 
 			.addCase(fetchContextsData.rejected, (state) => {
 				state.status = Status.ERROR;
-				state.actions = [];
+				state.contexts = [];
 			});
 	},
 });

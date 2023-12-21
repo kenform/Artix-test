@@ -6,6 +6,7 @@ export const fetchInitialStateData = createAsyncThunk<typeInitialStateForm[]>(
 	'panel/fetchPanelStatus',
 	async () => {
 		const { data } = await axios.get(`./api/action-panel.json`);
+		
 		return data;
 	},
 );

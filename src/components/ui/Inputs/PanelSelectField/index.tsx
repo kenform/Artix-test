@@ -4,24 +4,41 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import { typeActionsData } from '../../../../redux/drawer/types';
+import { typeContextData } from '../../../../redux/context/types';
+
 import { InputLabel } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { ListItemIcon } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { drawerDataSelector } from '../../../../redux/drawer/selectors';
+import { setSelectText } from '../../../../redux/drawer/slice';
 
 type typeTextFieldProps = {
 	text: string;
 	width: string;
-	defaultValue: string;
-	array: typeActionsData;
-	icon?:string;
+	defaultValue?: string;
+	array: typeActionsData | typeContextData;
+	icon?: string;
 };
 
-export default function PanelTextField({ text, width, defaultValue, array,icon }: typeTextFieldProps) {
-	const [age, setAge] = useState(defaultValue);
+export default function PanelTextField({
+	text,
+	width,
+	defaultValue,
+	array,
+	icon,
+}: typeTextFieldProps) {
+	const [state, setState] = useState(defaultValue);
+	const dispatch = useDispatch();
+	const { actions } = useSelector(drawerDataSelector);
+	// {},
+
 	const handleChange = (event: SelectChangeEvent) => {
-		setAge(event.target.value);
+		setState(event.target.value);
+		dispatch(setSelectText(actions[event.target.value].actionName));
 	};
+
 	return (
 		<>
 			<FormControl
@@ -35,7 +52,7 @@ export default function PanelTextField({ text, width, defaultValue, array,icon }
 					margin='dense'
 					label={text}
 					id='demo-simple-select-filled'
-					value={age}
+					value={state}
 					onChange={handleChange}
 					size='small'
 					variant='outlined'
@@ -44,19 +61,23 @@ export default function PanelTextField({ text, width, defaultValue, array,icon }
 					{array.map((element) => (
 						<MenuItem
 							sx={{
-								paddingLeft: `10px`,
+								paddingLeft: `5px`,
 							}}
 							key={Object.values(element)[0]}
 							value={Object.values(element)[0]}
 						>
 							{Object.values(element)[1]}
-							{icon && <ListItemIcon sx={{
-								position:'absolute',	
-								right: `10px`,
-							}}>
-								<CloseIcon/>
-							</ListItemIcon> }
-							
+
+							{icon && (
+								<ListItemIcon
+									sx={{
+										position: 'absolute',
+										right: `10px`,
+									}}
+								>
+									<CloseIcon />
+								</ListItemIcon>
+							)}
 						</MenuItem>
 					))}
 				</Select>

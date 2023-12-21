@@ -6,6 +6,8 @@ import { fetchActionsData } from './asyncActions';
 const initialState: IDrawerSliceState = {
 	actions: [],
 	color: '',
+	select:'',
+	name:'',
 	status: Status.LOADING,
 };
 
@@ -13,11 +15,17 @@ export const drawerSlice = createSlice({
 	name: 'drawer',
 	initialState,
 	reducers: {
-		setItems(state, action: PayloadAction<typeActionsData[]>) {
+		setActions(state, action: PayloadAction<typeActionsData[]>) {
 			state.actions = action.payload;
 		},
 		setColor(state, action: PayloadAction<string>) {
 			state.color = action.payload;
+		},
+		setSelectText(state, action: PayloadAction<string>) {
+			state.select = action.payload;
+		},
+		setName(state, action: PayloadAction<string>) {
+			state.name = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -38,6 +46,6 @@ export const drawerSlice = createSlice({
 	},
 });
 
-export const { setItems, setColor } = drawerSlice.actions;
+export const { setActions, setColor, setSelectText, setName } = drawerSlice.actions;
 
 export default drawerSlice.reducer;

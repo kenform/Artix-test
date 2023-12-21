@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
 
 import panel from './panel/slice';
 import drawer from './drawer/slice';
-import contexts from './drawer/slice';
+import context from './context/slice';
+import { useDispatch } from 'react-redux';
 
 export const store = configureStore({
 	reducer: {
 		panel,
 		drawer,
-		contexts,
+		context,
 	},
 });
 

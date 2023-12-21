@@ -1,13 +1,27 @@
+import { IDrawerSliceState } from "../drawer/types";
+
 export type typeInitialStateForm = {
 	code: number;
 	contextCode: number;
 	page: number;
 	rowCount: number;
 	columnCount: number;
-} & typeActionPanelItems;
+	actionPanelItems: typeActionPanelItems[];
+} 
 
+export type typeLayouts = {
+	code: number;
+	row: number;
+	column: number;
+	rowSpan: number;
+	columnSpan: number;
+	i: number;
+	x: number;
+	y: number;
+	w: number;
+	h: number;
+};
 export type typeActionPanelItems = {
-	actionPanelItems: {
 		code: number;
 		actionCode: number;
 		row: number;
@@ -16,7 +30,6 @@ export type typeActionPanelItems = {
 		columnSpan: number;
 		color: string;
 		name: string;
-	}[];
 };
 
 
@@ -28,5 +41,7 @@ export enum Status {
 
 export interface IPanelSliceState {
 	items: typeInitialStateForm[];
+	layouts: typeLayouts[];
+	test: IDrawerSliceState[];
 	status: Status;
 }

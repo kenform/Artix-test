@@ -5,6 +5,7 @@ import { purple, blue } from '@mui/material/colors';
 type typeButtonProps = {
 	modifier: string;
 	text: string;
+	onClick?:React.MouseEventHandler;
 };
 
 const PurpleButton = styled(Button)<ButtonProps>(({ theme }) => ({
@@ -32,23 +33,33 @@ const BlueOutlinedButton = styled(Button)<ButtonProps>(({ theme }) => ({
 	},
 }));
 
-// {`button ${modifier}`}
-export default function PanelButton({ modifier, text }: typeButtonProps) {
+export default function PanelButton({ modifier, text,onClick }: typeButtonProps) {
 	return (
-		(modifier === 'purple' && (
-			<PurpleButton size='large' variant='contained'>
-				{text}
-			</PurpleButton>
-		)) ||
-		(modifier === 'blue' && (
-			<BlueButton size='large' variant='contained'>
-				{text}
-			</BlueButton>
-		)) ||
-		(modifier === 'outline' && (
-			<BlueOutlinedButton size='large' variant='outlined'>
-				{text}
-			</BlueOutlinedButton>
-		))
+		<>
+			{(() => {
+				switch (modifier) {
+					case 'purple':
+						return (
+							<PurpleButton onClick={onClick} size='large' variant='contained'>
+								{text}
+							</PurpleButton>
+						);
+					case 'blue':
+						return (
+							<BlueButton onClick={onClick} size='large' variant='contained'>
+								{text}
+							</BlueButton>
+						);
+					case 'outline':
+						return (
+							<BlueOutlinedButton onClick={onClick} size='large' variant='outlined'>
+								{text}
+							</BlueOutlinedButton>
+						);
+					default:
+						return null;
+				}
+			})()}
+		</>
 	);
 }

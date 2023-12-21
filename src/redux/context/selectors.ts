@@ -1,3 +1,3 @@
-import { RootState } from "../store";
+import { RootState } from '../store';
 
-export const contextsDataSelector = (state: RootState) => state.contexts;
+export const ContextsSelector = (state: RootState) => state.context;

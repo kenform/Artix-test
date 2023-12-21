@@ -33,11 +33,56 @@
 	min-height: 480px;
 	min-width: 800px;
 	&__content {
+		padding: 16px;
 	}
 	&__body {
 	}
 }
-.box{
-	border:1px solid red;
-	background-color: #E2E2E2;
+.touch__button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	background-color: #e2e2e2;
+	border-radius: 4px;
+	min-width: 60px;
+	min-height: 60px;
+	text-align: center;
+	position: relative;
+	@media (any-hover: hover) {
+		&:hover {
+			.touch__button-icon {
+				&_drag,
+				&_remove,
+				&_resize {
+					display: block;
+				}
+			}
+		}
+	}
+	&-text {
+	}
+	&-icon {
+		&_drag,
+		&_remove,
+		&_resize {
+			display: none;
+		}
+		&_drag {
+			position: absolute;
+			left: 5px;
+			top: 5px;
+		}
+		&_remove {
+			position: absolute;
+			left: 5px;
+			bottom: 5px;
+		}
+		&_resize {
+			position: absolute;
+			right: 5px;
+			bottom: 5px;
+		}
+	}
 }

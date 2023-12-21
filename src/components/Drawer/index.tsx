@@ -4,37 +4,27 @@ import Drawer from '@mui/material/Drawer';
 import Button, { ButtonProps } from '@mui/material/Button';
 import PanelTextField from '../ui/Inputs/PanelTextField';
 import PanelSelectField from '../ui/Inputs/PanelSelectField';
-import Buttons from '../PanelSetting/Buttons';
+
 import PanelColorPicker from '../PanelColorPicker';
 import PanelButton from '../ui/Button';
 import styled from '@emotion/styled';
-
+import Stack from '@mui/material/Stack';
 import { drawerDataSelector } from '../../redux/drawer/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { panelDataSelector } from '../../redux/panel/selectors';
 
-const data = [
-	{
-		value: '1',
-		label: 'Выход',
-	},
-	{
-		value: '2',
-		label: 'item 2',
-	},
-	{
-		value: '3',
-		label: 'item 2',
-	},
-	{
-		value: '4',
-		label: 'item 2',
-	},
-];
+import { addItem, setItems } from '../../redux/panel/slice';
+import { setActions, setColor } from '../../redux/drawer/slice';
+import { IDrawerSliceState } from '../../redux/drawer/types';
 
 type Anchor = 'right';
 
 export default function PanelDrawer() {
-	const { color, status, actions } = useSelector(drawerDataSelector);
+	const dispatch = useDispatch();
+	const { actions, color,select,name } = useSelector(drawerDataSelector);
+	const { items, status } = useSelector(panelDataSelector);
+
 	const [state, setState] = React.useState({
 		right: false,
 	});
@@ -56,6 +46,15 @@ export default function PanelDrawer() {
 		marginLeft: '-8px',
 	}));
 
+	const onClickAdd = () => {
+		const item:IDrawerSliceState = {
+			// props
+			color,
+			select,
+			name,
+		};
+		dispatch(addItem(item));
+	};
 	const list = (anchor: Anchor) => (
 		<Box sx={{ width: 480, paddingLeft: '33px' }} role='presentation'>
 			<div className='main-block__suptitle'>
@@ -63,21 +62,32 @@ export default function PanelDrawer() {
 				<h5>Создание клавиши</h5>
 			</div>
 
-			<PanelTextField text='Название' width='400px' defaultValue={''} />
-
-			<PanelSelectField
-				text='Действие'
-				width='400px'
-				defaultValue={'2'}
-				array={actions}
-			/>
-
+			<PanelTextField text='Название' width='400px'  />
+			<PanelSelectField text='Действие' width='400px' defaultValue={'2'} array={actions} />
 			<PanelTextField text='Цвет' width='200px' defaultValue={color} value={color} />
 			<PanelColorPicker />
 
-			<Buttons modifier='blue' modifier2='outline' text='Сохранить' text2='Отменить' />
+			{/* onClick={onClickAdd} */}
+			<Stack spacing={2} mt={3} mb={3} direction='row'>
+				<PanelButton onClick={onClickAdd} modifier='blue' text='Сохранить' />
+				<PanelButton modifier='outline' text='Отменить' />
+			</Stack>
 		</Box>
 	);
+
+	useEffect(() => {
+		if (status === 'success') {
+			dispatch(setItems(items));
+			dispatch(setActions(actions));
+			dispatch(setColor(color));
+			// const ActionsValues = Object.values(actions);
+
+			// const itemsActionsCode = actionPanelItems.map((element) => Object.values(element)[1]);
+
+			// console.log(actions)
+			// console.log(ActionsValues);
+		}
+	}, [actions, items, color]);
 
 	return (
 		<div>
@@ -87,7 +97,12 @@ export default function PanelDrawer() {
 						<DrawerButton onClick={toggleDrawer(anchor, true)}>
 							<PanelButton modifier='purple' text='Добавить клавишу' />
 						</DrawerButton>
-						<Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+						<Drawer
+							ModalProps={{ disableScrollLock: true }}
+							anchor={anchor}
+							open={state[anchor]}
+							onClose={toggleDrawer(anchor, false)}
+						>
 							{list(anchor)}
 						</Drawer>
 						<PanelButton modifier='purple' text='Очистить панель' />
@@ -96,3 +111,4 @@ export default function PanelDrawer() {
 		</div>
 	);
 }
+

@@ -1,6 +1,8 @@
+
+
 export type typeActionsData = {
-	actionCode: number;
 	actionName: string;
+	actionCode: number;
 }[];
 
 export enum Status {
@@ -11,7 +13,9 @@ export enum Status {
 
 
 export interface IDrawerSliceState {
-	actions: typeActionsData[];
-	status: Status;
+	actions?: typeActionsData[];
 	color: string;
+	select: string;
+	name: string;
+	status: Status;
 }

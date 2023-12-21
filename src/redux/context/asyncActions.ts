@@ -3,10 +3,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { typeContextData } from './types';
 
 export const fetchContextsData = createAsyncThunk<typeContextData[]>(
-	'panel/fetchPanelStatus',
+	'context/fetchContextsStatus',
 	async () => {
 		const { data } = await axios.get(`./api/context.json`);
-		console.log(data)
 		return data;
 	},
 );

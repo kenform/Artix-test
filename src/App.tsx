@@ -22,7 +22,7 @@ function App() {
 	useEffect(() => {
 		dispatch(fetchInitialStateData());
 		dispatch(fetchActionsData());
-		// dispatch(fetchContextsData());
+		dispatch(fetchContextsData());
 	}, []);
 
 	return (

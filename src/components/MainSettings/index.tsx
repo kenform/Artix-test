@@ -5,34 +5,14 @@ import PanelSelectField from '../ui/Inputs/PanelSelectField';
 import { useSelector } from 'react-redux';
 
 import { panelDataSelector } from '../../redux/panel/selectors';
-import { contextsDataSelector } from '../../redux/context/selectors';
-
-const data = [
-	{
-		value: '1',
-		label: 'Открытый документ',
-	},
-	{
-		value: '2',
-		label: 'item 2',
-	},
-	{
-		value: '3',
-		label: 'item 2',
-	},
-	{
-		value: '4',
-		label: 'item 2',
-	},
-];
-
+import { ContextsSelector } from '../../redux/context/selectors';
 
 export default function MainSettings() {
+	const { contexts } = useSelector(ContextsSelector);
 	const { items, status } = useSelector(panelDataSelector);
 	// пробовал брать из редакса состояние context и передать его как массив в PanelSelectField
 	// но не разобрался как типизировать передаваемые пропсы или как подстроить под все случаи пропсы для  array в PanelSelectField. Пока оставил заглушку массив data
 
-	const { contexts } = useSelector(contextsDataSelector);
 	return (
 		<>
 			{status === 'success' && (
@@ -51,8 +31,8 @@ export default function MainSettings() {
 					<PanelSelectField
 						text='Контекст'
 						width='100%'
-						defaultValue={'1'}
-						array={data}
+						defaultValue={'6'}
+						array={contexts}
 						icon='true'
 					/>
 				</Box>

@@ -7,7 +7,7 @@ import { setColor } from '../../redux/drawer/slice';
 export default function PanelColorPicker() {
 	const dispatch = useAppDispatch();
 
-	const [stateColor, setStateColor] = useState('rgba(178.9692, 73.9908, 73.9908, 1)');
+	const [stateColor, setStateColor] = useState('#E2E2E2');
 	const { valueToHex } = useColorPicker(stateColor, setStateColor);
 
 	const hexString = valueToHex();
