@@ -62,22 +62,27 @@
 		}
 	}
 	&-text {
+		text-align: center;
 	}
 	&-icon {
 		&_drag,
 		&_remove,
 		&_resize {
-			display: none;
+			// display: none;
+			z-index:1000;
+			
 		}
 		&_drag {
 			position: absolute;
 			left: 5px;
 			top: 5px;
+			cursor: grab;
 		}
 		&_remove {
 			position: absolute;
 			left: 5px;
 			bottom: 5px;
+			cursor: pointer;
 		}
 		&_resize {
 			position: absolute;

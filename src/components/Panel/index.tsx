@@ -7,20 +7,18 @@ import { setLayouts, setItems } from '../../redux/panel/slice';
 import { setActions, setColor } from '../../redux/drawer/slice';
 
 import { panelDataSelector } from '../../redux/panel/selectors';
-import PanelTouchButton from '../ui/TouchButton';
-import { useEffect, useMemo } from 'react';
+import PanelTouchButton from '../ui/PanelButton';
+import { useEffect, useMemo, useRef } from 'react';
 import { typeActionPanelItems, typeLayouts } from '../../redux/panel/types';
+import { IDrawerSliceState } from '../../redux/drawer/types';
 
 export default function Panel() {
 	const ResponsiveReactGridLayout = useMemo(() => WidthProvider(Responsive), []);
 	const dispatch = useDispatch();
 	const { actions, color } = useSelector(drawerDataSelector);
 	const { items, status, layouts, test } = useSelector(panelDataSelector);
-
 	const actionPanelItems = items.actionPanelItems;
 
-	// console.log(ArrayActions);
-	// console.log(ArrayActions[0].actionName);
 
 	useEffect(() => {
 		if (status === 'success') {
@@ -57,20 +55,20 @@ export default function Panel() {
 							onResize={() => {}}
 							cols={{ lg: 6, md: 3, sm: 3, xs: 4, xxs: 3 }}
 						>
-							{actionPanelItems.map((element: typeActionPanelItems) => (
-								// value every element actionCode (15 example)
+							{test.map((element: typeActionPanelItems |IDrawerSliceState
+							) => (
+								// value every element actionCode	(15 example)
 								// console.log(element.actionCode),
 								// console.log(Object.values(element)[1]),
 								// console.log(actions[Object.values(element)[0]]),
-
 								// console.log(element.actionCode),
-
+// resizeHandle?: ReactElement<any> | ((resizeHandleAxis: ResizeHandleAxis, ref: ReactRef<HTMLElement>) => ReactElement<any>),
 								<div
 									key={element.code}
 									className='touch__button'
-									style={{ backgroundColor: element.color }}
+									style={{ backgroundColor: color }}
 								>
-									<PanelTouchButton key={element.code} text={element.name} />
+									<PanelTouchButton  key={element.code} text={element.name} code={element.code}/>
 								</div>
 							))}
 						</ResponsiveReactGridLayout>

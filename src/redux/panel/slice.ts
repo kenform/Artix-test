@@ -8,7 +8,7 @@ const initialState: IPanelSliceState = {
 	items: [],
 	layouts: [],
 	status: Status.LOADING,
-	test:[],
+	test:[]
 };
 
 export const panelSlice = createSlice({
@@ -17,6 +17,7 @@ export const panelSlice = createSlice({
 	reducers: {
 		setItems(state, action: PayloadAction<typeInitialStateForm[]>) {
 			state.items = action.payload;
+			
 		},
 		setLayouts(state, action: PayloadAction<typeLayouts[]>) {
 			state.layouts = action.payload;
@@ -24,16 +25,20 @@ export const panelSlice = createSlice({
 
 		addItem(state, action: PayloadAction<IDrawerSliceState>) {
 			// console.log(...action.payload);
+				// state.items.push({ ...action.payload });
 			state.test.push({ ...action.payload });
 		},
 
-		// changeItem(state, action: PayloadAction<typeInitialStateForm[]>) {
-		// 	state.items = action.payload;
-		// },
+		removeItem(state, action: PayloadAction<typeInitialStateForm[]>) {
+				const findItem = state.test.find((obj) => obj.code === action.payload);
+				if (findItem) {
+					state.test = state.test.filter((obj) => obj.code !== action.payload);
+				}
+		},
 
-		// clearItems(state) {
-		// 	state.items. = [];
-		// },
+		clearItems(state) {
+			state.test = [];
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -53,6 +58,6 @@ export const panelSlice = createSlice({
 	},
 });
 
-export const { setItems, setLayouts, addItem } = panelSlice.actions;
+export const { setItems, setLayouts, addItem, clearItems, removeItem } = panelSlice.actions;
 
 export default panelSlice.reducer;

@@ -11,7 +11,6 @@ export default function PanelColorPicker() {
 	const { valueToHex } = useColorPicker(stateColor, setStateColor);
 
 	const hexString = valueToHex();
-console.log(hexString)
 	const updateSearchValue = useCallback(
 		debounce((str: string) => {
 			dispatch(setColor(str));

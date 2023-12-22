@@ -20,6 +20,7 @@ export const drawerSlice = createSlice({
 		},
 		setColor(state, action: PayloadAction<string>) {
 			state.color = action.payload;
+			
 		},
 		setSelectText(state, action: PayloadAction<string>) {
 			state.select = action.payload;

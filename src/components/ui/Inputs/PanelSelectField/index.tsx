@@ -36,7 +36,12 @@ export default function PanelTextField({
 
 	const handleChange = (event: SelectChangeEvent) => {
 		setState(event.target.value);
-		dispatch(setSelectText(actions[event.target.value].actionName));
+		const num = event.target.value;
+		
+		const arta = actions.actionCode;
+		console.log(arta);
+
+		// dispatch(setSelectText(actions[event.target.value].actionName));
 	};
 
 	return (
