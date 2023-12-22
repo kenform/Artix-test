@@ -2,17 +2,27 @@ import TextField from '@mui/material/TextField';
 import debounce from 'lodash.debounce';
 import { useDispatch } from 'react-redux';
 import { setName } from '../../../../redux/drawer/slice';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
 type typeTextFieldProps = {
-	text: string,
-	width: string,
-	defaultValue?: string,
-	value?:string,
+	text: string;
+	width: string;
+	defaultValue?: string;
+	value?: string;
+	typeField?:string;
+};
 
+interface IFormInput {
+	value: number;
 }
+export default function PanelTextField({ text, width, defaultValue, value,typeField }: typeTextFieldProps) {
+	const {
+		register,
+		formState: { errors },
+	} = useForm<IFormInput>({ mode: 'onChange' });
 
-export default function PanelTextField({text,width,defaultValue,value}:typeTextFieldProps) {
+	const textField = useRef<HTMLDivElement>(null);
 	const dispatch = useDispatch();
 	const updateSearchValue = useCallback(
 		debounce((str: string) => {
@@ -23,22 +33,29 @@ export default function PanelTextField({text,width,defaultValue,value}:typeTextF
 
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		updateSearchValue(event.target.value);
+		
 	};
+		
 	return (
-			<TextField
-				id='outlined-basic'
-				size="small"
-				label={text}
-				variant='outlined'
-				defaultValue={defaultValue}
-				margin='normal'
-				onChange={onChangeInput}
-				sx={{
-					'& > :not(style)': { width: `${width}` },
-				}}
-				value={value}
-			/>
-
-
+		<TextField
+			ref={textField}
+			{...register('value', {valueAsNumber: true, })}
+			id='outlined-basic'
+			size='small'
+			label={text}
+			type={typeField}
+			variant='outlined'
+			defaultValue={defaultValue}
+			margin='normal'
+			onChange={onChangeInput}
+			sx={{
+				'& > :not(style)': { width: `${width}` },
+			}}
+			value={value}
+		>
+			{errors.value && (
+				<div style={{ color: 'red', marginTop: '-10px' }}>{errors.value.message}</div>
+			)}
+		</TextField>
 	);
 }

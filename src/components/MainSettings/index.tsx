@@ -25,8 +25,8 @@ export default function MainSettings() {
 					noValidate
 					autoComplete='off'
 				>
-					<PanelTextField text='Код' width='200px' defaultValue={items.code} />
-					<PanelTextField text='Страница' width='100%' defaultValue={items.page} />
+					<PanelTextField text='Код' width='200px' typeField='number' defaultValue={items.code} />
+					<PanelTextField text='Страница' width='100%' defaultValue={items.page} typeField='number' />
 
 					<PanelSelectField
 						text='Контекст'

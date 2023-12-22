@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { ListItemIcon } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { drawerDataSelector } from '../../../../redux/drawer/selectors';
-import { setSelectText } from '../../../../redux/drawer/slice';
+// import { setSelectText } from '../../../../redux/drawer/slice';
 
 type typeTextFieldProps = {
 	text: string;
